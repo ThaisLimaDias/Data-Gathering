@@ -44,7 +44,8 @@ namespace SPI_Data_Gathering
                         string retorno = string.Empty;
                         Log.Debug("Get Na URL do CH_"+ item.CHANEL + " IP:" + item.URL);
                         Log.Debug("antes do Get " + DateTime.Now);
-                        mg = ReturnChanel(item.URL, out retorno);                        
+                        mg = ReturnChanel(item.URL, out retorno);
+                        mg.Ip = item.IP;                      
                         if (retorno != "OK")
                         {
                             item.STATUS = "OFF";
