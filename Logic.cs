@@ -44,17 +44,17 @@ namespace SPI_Data_Gathering
                         string retorno = string.Empty;
                         Log.Debug("Get Na URL do CH_"+ item.CHANEL + " IP:" + item.URL);
                         Log.Debug("antes do Get " + DateTime.Now);
-                        mg = ReturnChanel(item.URL, out retorno);
-                        mg.Ip = item.IP;                      
+                        mg = ReturnChanel(item.URL, out retorno);                                              
                         if (retorno != "OK")
                         {
                             item.STATUS = "OFF";
                             _wiseModel.UpdateWise(item);
-                            Log.Error("Erro no retorno da Url get da API Rest do Advantech ");
+                            Log.Error("Erro no retorno da Url get da API Rest do Advantech WISE:" + item.IP);
                         }
 
                         else //Caso retorne valor ok no get chama procedure de migração
                         {
+                            mg.Ip = item.IP;
                             item.STATUS = "ON";
                             _wiseModel.UpdateWise(item);
                             var obj = JsonConvert.SerializeObject(mg);
